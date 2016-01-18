@@ -769,7 +769,11 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
         ErrorF("couldn't get display device\n");
         goto error;
     }
+#if 0
     glamor_egl->display = eglGetDisplay(glamor_egl->gbm);
+#else
+    glamor_egl->display = eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, glamor_egl->gbm, NULL);
+#endif
 #else
     glamor_egl->display = eglGetDisplay((EGLNativeDisplayType) (intptr_t) fd);
 #endif
