@@ -339,6 +339,8 @@ _glamor_create_tex(glamor_screen_private *glamor_priv,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glamor_priv->suppress_gl_out_of_memory_logging = true;
+    if (format == GL_RGBA)
+	    format = GL_BGRA;
     glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0,
                  format, GL_UNSIGNED_BYTE, NULL);
     glamor_priv->suppress_gl_out_of_memory_logging = false;
