@@ -473,6 +473,11 @@ doShmPutImage(DrawablePtr dst, GCPtr pGC,
 {
     PixmapPtr pPixmap;
 
+    /*
+     * Fixme:
+     * found that video run into this path will get wrong display.
+     */
+#if 0
     if (format == ZPixmap || (format == XYPixmap && depth == 1)) {
         pPixmap = GetScratchPixmapHeader(dst->pScreen, w, h, depth,
                                          BitsPerPixel(depth),
@@ -483,7 +488,9 @@ doShmPutImage(DrawablePtr dst, GCPtr pGC,
                            dy);
         FreeScratchPixmapHeader(pPixmap);
     }
-    else {
+    else 
+#endif
+    {
         GCPtr putGC = GetScratchGC(depth, dst->pScreen);
 
         if (!putGC)
