@@ -554,7 +554,7 @@ glamor_egl_destroy_pixmap(PixmapPtr pixmap)
             glamor_get_pixmap_private(pixmap);
 
 	if (pixmap_priv->bo)
-		gbm_bo_unref(pixmap_priv->bo);
+		gbm_bo_destroy(pixmap_priv->bo);
         if (pixmap_priv->image)
             eglDestroyImageKHR(glamor_egl->display, pixmap_priv->image);
     }
