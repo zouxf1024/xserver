@@ -704,6 +704,7 @@ _glamor_upload_bits_to_pixmap_texture(PixmapPtr pixmap, GLenum format,
         glUniform1i(glamor_priv->finish_access_swap_rb[no_alpha], swap_rb);
 
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glamor_flush();
 
         glDisableVertexAttribArray(GLAMOR_VERTEX_POS);
         glDisableVertexAttribArray(GLAMOR_VERTEX_SOURCE);
