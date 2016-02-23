@@ -704,12 +704,12 @@ _glamor_upload_bits_to_pixmap_texture(PixmapPtr pixmap, GLenum format,
         glUniform1i(glamor_priv->finish_access_swap_rb[no_alpha], swap_rb);
 
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        glamor_flush();
+        glamor_draw_add();
 
         glDisableVertexAttribArray(GLAMOR_VERTEX_POS);
         glDisableVertexAttribArray(GLAMOR_VERTEX_SOURCE);
         glDeleteTextures(1, &tex);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        //glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
     if (need_free_bits)

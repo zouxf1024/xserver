@@ -303,6 +303,7 @@ static GCOps glamor_gc_ops = {
     .ImageGlyphBlt = miImageGlyphBlt,
     .PolyGlyphBlt = glamor_poly_glyph_blt,
     .PushPixels = glamor_push_pixels,
+    .Flush = glamor_flush,
 };
 
 /*

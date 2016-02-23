@@ -337,6 +337,7 @@ static GCFuncs damageGCFuncs = {
 };
 
 static GCOps damageGCOps;
+GCOps gOps = {0};
 
 static Bool
 damageCreateGC(GCPtr pGC)
@@ -363,6 +364,7 @@ damageCreateGC(GCPtr pGC)
     const GCFuncs *oldFuncs = pGC->funcs; \
     unwrap(pGCPriv, pGC, funcs);  \
     unwrap(pGCPriv, pGC, ops); \
+    gOps.Flush = pGC->ops->Flush;
 
 #define DAMAGE_GC_OP_EPILOGUE(pGC, pDrawable) \
     wrap(pGCPriv, pGC, funcs, oldFuncs); \
@@ -1419,6 +1421,14 @@ damagePushPixels(GCPtr pGC,
     (*pGC->ops->PushPixels) (pGC, pBitMap, pDrawable, dx, dy, xOrg, yOrg);
     damageRegionProcessPending(pDrawable);
     DAMAGE_GC_OP_EPILOGUE(pGC, pDrawable);
+}
+
+void
+damageFlush(void)
+{
+    if(gOps.Flush) {
+        (*gOps.Flush) (NULL);
+    }
 }
 
 static void

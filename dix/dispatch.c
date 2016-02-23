@@ -240,6 +240,7 @@ long SmartLastPrint;
 #endif
 
 void Dispatch(void);
+int ProcFlush(void);
 
 static int
 SmartScheduleClient(int *clientReady, int nready)
@@ -356,7 +357,7 @@ Dispatch(void)
             FlushIfCriticalOutputPending();
         }
 
-        nready = WaitForSomething(clientReady);
+        nready = WaitForSomething(clientReady, ProcFlush);
 
         if (nready) {
             clientReady[0] = SmartScheduleClient(clientReady, nready);
@@ -3350,6 +3351,13 @@ ProcNoOperation(ClientPtr client)
     REQUEST_AT_LEAST_SIZE(xReq);
 
     /* noop -- don't do anything */
+    return Success;
+}
+
+int
+ProcFlush(void)
+{
+    damageFlush();
     return Success;
 }
 

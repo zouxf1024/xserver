@@ -390,7 +390,7 @@ glamor_copy_fbo_fbo_draw(DrawablePtr src,
             glamor_glDrawArrays_GL_QUADS(glamor_priv, nbox);
         }
     }
-    glamor_flush();
+    glamor_draw_add();
     glDisable(GL_SCISSOR_TEST);
     glDisableVertexAttribArray(GLAMOR_VERTEX_POS);
 

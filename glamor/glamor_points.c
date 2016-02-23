@@ -101,7 +101,7 @@ glamor_poly_point_gl(DrawablePtr drawable, GCPtr gc, int mode, int npt, DDXPoint
             glDrawArrays(GL_POINTS, 0, npt);
         }
     }
-    glamor_flush();
+    glamor_draw_add();
 
     glDisable(GL_SCISSOR_TEST);
     glDisableVertexAttribArray(GLAMOR_VERTEX_POS);

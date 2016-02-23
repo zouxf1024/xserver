@@ -112,4 +112,7 @@ extern _X_EXPORT void
 
 extern _X_EXPORT DamageScreenFuncsPtr DamageGetScreenFuncs(ScreenPtr);
 
+extern _X_EXPORT void
+ damageFlush(void);
+
 #endif                          /* _DAMAGE_H_ */
