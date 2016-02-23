@@ -283,7 +283,7 @@ glamor_glyphs_flush(CARD8 op, PicturePtr src, PicturePtr dst,
             break;
         prog++;
     }
-    glamor_flush();
+    glamor_draw_add();
 
     glDisable(GL_SCISSOR_TEST);
 

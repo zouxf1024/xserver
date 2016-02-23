@@ -233,6 +233,7 @@ typedef struct _GCOps {
                         int /*h */ ,
                         int /*x */ ,
                         int /*y */ );
+    void (*Flush) (GCPtr /*pGC */);
 } GCOps;
 
 /* there is padding in the bit fields because the Sun compiler doesn't

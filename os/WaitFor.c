@@ -143,7 +143,7 @@ static volatile OsTimerPtr timers = NULL;
  *****************/
 
 int
-WaitForSomething(int *pClientsReady)
+WaitForSomething(int *pClientsReady, int *(ProcFlush)(void))
 {
     int i;
     struct timeval waittime, *wt;
@@ -224,7 +224,24 @@ WaitForSomething(int *pClientsReady)
             i = Select(MaxClients, &LastSelectMask, &clientsWritable, NULL, wt);
         }
         else {
+            if(wt) {
+                wt->tv_sec = 0;
+                if(wt->tv_usec > 16000)     wt->tv_usec = 16000;
+            }
+
             i = Select(MaxClients, &LastSelectMask, NULL, NULL, wt);
+
+            {
+                static CARD32 last = 0;
+                CARD32 curr = GetTimeInMillis();
+                CARD32 expires = curr - last;
+                if(expires >= 16) {
+                    //ErrorF("ProcFlush, expires(%d) = curr(%d) - last(%d)\n",
+                    //    expires, curr, last);
+                    last = curr;
+                    ProcFlush();
+                }
+            }
         }
         selecterr = GetErrno();
         WakeupHandler(i, (void *) &LastSelectMask);

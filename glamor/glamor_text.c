@@ -211,7 +211,7 @@ glamor_text(DrawablePtr drawable, GCPtr gc,
         }
         glDisable(GL_SCISSOR_TEST);
     }
-    glamor_flush();
+    glamor_draw_add();
 
     glVertexAttribDivisor(GLAMOR_VERTEX_SOURCE, 0);
     glDisableVertexAttribArray(GLAMOR_VERTEX_SOURCE);

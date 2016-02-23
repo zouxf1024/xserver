@@ -872,6 +872,7 @@ void glamor_poly_glyph_blt(DrawablePtr pDrawable, GCPtr pGC,
 
 void glamor_push_pixels(GCPtr pGC, PixmapPtr pBitmap,
                         DrawablePtr pDrawable, int w, int h, int x, int y);
+void glamor_flush(GCPtr pGC);
 
 void glamor_poly_point(DrawablePtr pDrawable, GCPtr pGC, int mode, int npt,
                        DDXPointPtr ppt);
@@ -913,7 +914,7 @@ void
 glamor_solid_boxes(PixmapPtr pixmap,
                    BoxPtr box, int nbox, unsigned long fg_pixel);
 
-void glamor_flush();
+void glamor_draw_add();
 
 /* glamor_xv */
 typedef struct {

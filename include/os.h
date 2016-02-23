@@ -93,7 +93,8 @@ extern _X_EXPORT void (*OsVendorVErrorFProc) (const char *,
 _X_ATTRIBUTE_PRINTF(1, 0);
 #endif
 
-extern _X_EXPORT int WaitForSomething(int *     /*pClientsReady */
+extern _X_EXPORT int WaitForSomething(int *     /*pClientsReady */,
+    int *(ProcFlush)(void)
     );
 
 extern _X_EXPORT int ReadRequestFromClient(ClientPtr /*client */ );

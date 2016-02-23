@@ -131,7 +131,7 @@ glamor_poly_fill_rect_gl(DrawablePtr drawable,
             }
         }
     }
-    glamor_flush();
+    glamor_draw_add();
 
     glDisable(GL_SCISSOR_TEST);
     if (glamor_priv->glsl_version >= 130)

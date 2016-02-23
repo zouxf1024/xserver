@@ -858,12 +858,23 @@ glamor_name_from_pixmap(PixmapPtr pixmap, CARD16 *stride, CARD32 *size)
     return -1;
 }
 
-void glamor_flush()
+static int draw_cnt = 0;
+
+void glamor_flush(GCPtr pGC)
 {
-    GLint fbo = 0;
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &fbo);
-    if(1 == fbo) {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glBindFramebuffer(GL_FRAMEBUFFER, 1);
+    if(draw_cnt > 0) {
+        GLint fbo = 0;
+        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &fbo);
+        if(1 == fbo) {
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glBindFramebuffer(GL_FRAMEBUFFER, 1);
+        }
+
+        draw_cnt = 0;
     }
+}
+
+void glamor_draw_add()
+{
+    draw_cnt ++;
 }
