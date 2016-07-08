@@ -880,7 +880,7 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
 #define GLAMOR_CHECK_EGL_EXTENSION(EXT)  \
 	if (!epoxy_has_egl_extension(glamor_egl->display, "EGL_" #EXT)) {  \
 		ErrorF("EGL_" #EXT " required.\n");  \
-		goto error;  \
+/*		goto error; */ \
 	}
 
 #define GLAMOR_CHECK_EGL_EXTENSIONS(EXT1, EXT2)	 \
@@ -892,7 +892,9 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
 
     GLAMOR_CHECK_EGL_EXTENSION(KHR_gl_renderbuffer_image);
 #ifdef GLAMOR_GLES2
-    GLAMOR_CHECK_EGL_EXTENSIONS(KHR_surfaceless_context, KHR_surfaceless_gles2);
+ GLAMOR_CHECK_EGL_EXTENSION(KHR_surfaceless_context);
+    GLAMOR_CHECK_EGL_EXTENSION(KHR_surfaceless_gles2);
+//    GLAMOR_CHECK_EGL_EXTENSIONS(KHR_surfaceless_context, KHR_surfaceless_gles2);
 #else
     GLAMOR_CHECK_EGL_EXTENSIONS(KHR_surfaceless_context,
                                 KHR_surfaceless_opengl);
@@ -902,6 +904,7 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
     glamor_egl->context = eglCreateContext(glamor_egl->display,
                                            NULL, EGL_NO_CONTEXT,
                                            config_attribs_core);
+
 #else
     glamor_egl->context = NULL;
 #endif
@@ -925,7 +928,7 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
     if (!eglMakeCurrent(glamor_egl->display,
                         EGL_NO_SURFACE, EGL_NO_SURFACE, glamor_egl->context)) {
         xf86DrvMsg(scrn->scrnIndex, X_ERROR,
-                   "Failed to make EGL context current\n");
+                   "Failed to make EGL context currentgl%x egl%x\n", glGetError(), eglGetError());
         goto error;
     }
 #ifdef GLAMOR_HAS_GBM
