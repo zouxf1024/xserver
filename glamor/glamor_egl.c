@@ -614,7 +614,7 @@ glamor_egl_destroy_pixmap_image(PixmapPtr pixmap)
         pixmap_priv->image = NULL;
 
 	if (pixmap_priv->bo)
-		gbm_bo_unref(pixmap_priv->bo);
+		gbm_bo_destroy(pixmap_priv->bo);
     }
 }
 
