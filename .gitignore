@@ -80,3 +80,7 @@ core
 doltcompile
 doltlibtool
 xserver.ent
+build-main
+build-source
+build-udeb
+stampdir

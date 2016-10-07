@@ -1,6 +1,15 @@
+xorg-server (2:1.18.99-2) unstable; urgency=high
+
+  [ Mark Yao ]
+  * glamor: spans: fixup wrong count on glDrawArrays
+
+ -- Randy Li <randy.li@rock-chips.com>  Fri, 30 Sep 2016 09:17:07 +0000
+
 xorg-server (2:1.18.99-1) unstable; urgency=high
+
   * New upstream release
-    + add rockchip
+    + add rockchip support
+
  -- Randy Li <randy.li@rock-chips.com>  Wed, 11 Jul 2016 01:26:07 +0100
 
 xorg-server (2:1.16.4-1) unstable; urgency=high
